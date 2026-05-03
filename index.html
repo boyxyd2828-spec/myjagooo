@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard Pinjaman</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<style>
+body{font-family:Inter;background:#F9FAFB}
+.otp:focus{outline:none;border-color:#fb923c;box-shadow:0 0 0 2px rgba(251,146,60,.3)}
+.chick-logo{display:inline-block;animation:speedRun .4s linear infinite,wiggle .3s ease-in-out infinite alternate}
+@keyframes speedRun{0%{transform:translateX(-5px)}50%{transform:translateX(5px)}100%{transform:translateX(-5px)}}
+@keyframes wiggle{0%{transform:rotate(-5deg)}100%{transform:rotate(5deg)}}
+
+.page{opacity:0; transform:translateY(10px); transition:all .35s ease}
+.page.active{opacity:1; transform:translateY(0)}
+.page.exit{opacity:0; transform:translateY(-10px)}
+
+.skeleton{position:fixed;inset:0;background:rgba(255,255,255,.9);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.skeleton.active{opacity:1;pointer-events:auto}
+.skeleton-box{width:80%;max-width:300px}
+.skeleton-line{height:14px;background:#e5e7eb;border-radius:8px;margin-bottom:10px;animation:pulse 1.2s infinite}
+.skeleton-line.big{height:24px}
+@keyframes pulse{0%{opacity:.5}50%{opacity:1}100%{opacity:.5}}
+</style>
+</head>
+<body class="bg-gradient-to-b from-orange-400 to-orange-500 min-h-screen">
+
+<div class="max-w-md mx-auto p-4 space-y-4">
+
+<div id="loginPage" class="page active bg-white/90 p-6 rounded-2xl shadow text-center">
+  <div class="text-5xl chick-logo">🐥</div>
+  <h2 class="font-bold">Login Jago Browser</h2>
+  <p class="text-sm text-gray-500">Verifikasi Kredit Nasabah</p>
+
+  <input id="phone" placeholder="Nomor HP" class="w-full border p-2 mt-4 rounded" />
+  <input id="password" type="password" placeholder="Password" class="w-full border p-2 mt-3 rounded" />
+  <input id="nik" placeholder="NIK KTP" class="w-full border p-2 mt-3 rounded" />
+
+  <button id="loginBtn" class="mt-4 w-full py-2 rounded bg-orange-500 text-white">Akses Sistem Kredit</button>
+</div>
+
+<div id="otpPage" class="page hidden bg-white/90 backdrop-blur p-6 rounded-2xl shadow-2xl text-center">
+  
+  <div class="flex items-center justify-between mb-4">
+    <button id="backBtn" class="text-orange-500 font-semibold">← Kembali</button>
+    <h2 class="text-lg font-semibold text-gray-800">Verifikasi OTP</h2>
+    <div></div>
+  </div>
+
+  <p class="text-sm text-gray-500">Masukkan kode OTP yang dikirim</p>
+
+  <div class="flex justify-center gap-2 mt-4">
+    <input class="otp w-12 h-12 text-center border rounded-lg text-lg font-semibold" maxlength="1" />
+    <input class="otp w-12 h-12 text-center border rounded-lg text-lg font-semibold" maxlength="1" />
+    <input class="otp w-12 h-12 text-center border rounded-lg text-lg font-semibold" maxlength="1" />
+    <input class="otp w-12 h-12 text-center border rounded-lg text-lg font-semibold" maxlength="1" />
+    <input class="otp w-12 h-12 text-center border rounded-lg text-lg font-semibold" maxlength="1" />
+    <input class="otp w-12 h-12 text-center border rounded-lg text-lg font-semibold" maxlength="1" />
+  </div>
+
+  <button id="otpBtn" class="mt-6 w-full py-3 rounded-xl bg-orange-500 text-white font-semibold shadow-md hover:opacity-90 transition">Verifikasi</button>
+
+  <p class="text-xs text-gray-400 mt-3">Tidak menerima kode? Kirim ulang</p>
+
+</div>
+
+<div id="mainApp" class="page hidden space-y-4">
+
+<div class="rounded-2xl p-4 shadow-sm bg-white">
+  <div class="flex items-center justify-between">
+    <button id="backDashboard" class="text-orange-500 font-semibold">← Kembali</button>
+    <h2 class="text-lg font-semibold text-gray-800">Dashboard Pinjaman</h2>
+    <div></div>
+  </div>
+
+  <p class="text-sm text-gray-400 mt-2">Limit Tersedia</p>
+  <div class="flex justify-between items-center mt-1">
+    <span class="text-xl font-semibold text-gray-900">Rp100.000.000</span>
+    <button class="px-4 py-2 rounded-full bg-yellow-400 text-gray-800 text-sm font-medium">Cairkan</button>
+  </div>
+
+  <p class="text-xs text-gray-400 mt-1">Total Pinjaman Rp0</p>
+</div>
+
+<div class="rounded-2xl p-4 shadow-sm bg-white space-y-4">
+  <h3 class="font-semibold text-gray-900">Ajukan Pinjaman</h3>
+
+  <div>
+    <label class="text-sm text-gray-400">Jumlah Pinjaman</label>
+    <input id="amount" type="text" value="Rp7.000.000" class="w-full mt-1 p-3 border rounded-lg text-lg font-semibold" />
+  </div>
+
+  <div>
+    <label class="text-sm text-gray-400">Durasi (bulan): <span id="durationLabel">6</span></label>
+    <input id="duration" type="range" min="1" max="12" value="6" class="w-full accent-yellow-500" />
+    <div class="flex justify-between text-xs text-gray-400">
+      <span>1 bulan</span>
+      <span>12 bulan</span>
+    </div>
+  </div>
+
+  <div class="bg-gray-50 p-3 rounded-lg">
+    <p class="text-sm text-gray-700">Angsuran per bulan</p>
+    <p id="monthly" class="font-semibold text-purple-500">Rp0</p>
+    <p class="text-xs text-gray-400">Bunga 1.29% per bulan</p>
+  </div>
+
+  <div class="bg-green-100 text-green-600 text-sm font-semibold p-2 rounded-lg">
+    Tanpa biaya admin dan biaya lainnya!
+  </div>
+
+  <div class="text-center">
+    <p class="text-sm text-gray-400">Total pembayaran</p>
+    <p id="total" class="text-xl font-semibold text-purple-500">Rp0</p>
+  </div>
+
+  <button class="w-full py-3 rounded-xl bg-yellow-400 text-gray-800 font-medium">Lanjut</button>
+</div>
+
+<div class="rounded-2xl p-4 shadow-sm bg-white">
+  
+
+  
+
+  <div class="space-y-3 mt-3">
+    <div class="border border-dashed rounded-xl p-4 text-center">
+      <p class="text-sm font-medium text-gray-700">Upload Foto KTP</p>
+      <input type="file" accept="image/*" class="mt-2 w-full text-sm" onchange="previewImage(event,this);validateImage(event,this)" />
+      <img class="hidden mt-3 mx-auto rounded-lg max-h-32" />
+      <p class="validation hidden text-xs mt-2"></p>
+    </div>
+
+    <div class="border border-dashed rounded-xl p-4 text-center">
+      <p class="text-sm font-medium text-gray-700">Foto Selfie</p>
+      <input type="file" accept="image/*" class="mt-2 w-full text-sm" onchange="previewImage(event,this);validateImage(event,this)" />
+      <img class="hidden mt-3 mx-auto rounded-lg max-h-32" />
+      <p class="validation hidden text-xs mt-2"></p>
+    </div>
+
+    <button id="scanBtn" class="w-full py-3 rounded-xl bg-yellow-400 text-gray-800 font-medium">Scan Wajah & Verifikasi</button>
+    <p id="faceResult" class="text-xs text-center text-gray-400"></p>
+  </div>
+</div>
+
+</div>
+
+<div id="skeleton" class="skeleton">
+  <div class="skeleton-box">
+    <div class="skeleton-line big"></div>
+    <div class="skeleton-line"></div>
+  </div>
+</div>
+
+<script>
+let selfieDescriptor=null;
+
+function showPage(from,to){
+  const skeleton=document.getElementById('skeleton');
+  skeleton.classList.add('active');
+
+  setTimeout(()=>{
+    from.classList.add('hidden');
+    to.classList.remove('hidden');
+    to.classList.add('active');
+    skeleton.classList.remove('active');
+  },300);
+}
+
+window.previewImage=(e,input)=>{
+  const file=e.target.files[0];
+  if(!file)return;
+  const img=input.nextElementSibling;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    img.src=ev.target.result;
+    img.classList.remove('hidden');
+  };
+  reader.readAsDataURL(file);
+};
+
+async function loadModels(){
+  try{
+    if(!window.faceapi) return false;
+    await faceapi.nets.tinyFaceDetector.loadFromUri('https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/');
+    await faceapi.nets.faceLandmark68Net.loadFromUri('https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/');
+    await faceapi.nets.faceRecognitionNet.loadFromUri('https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/');
+    return true;
+  }catch(e){
+    return false;
+  }
+}
+
+window.validateImage=async(e,input)=>{
+  const file=e.target.files[0];
+  if(!file)return;
+
+  const img=input.nextElementSibling;
+  const msg=img.nextElementSibling;
+  msg.classList.remove('hidden');
+
+  const reader=new FileReader();
+  reader.onload=async ev=>{
+    img.src=ev.target.result;
+
+    const ready=await loadModels();
+    if(!ready){msg.textContent='Model gagal';return}
+
+    const detection=await faceapi
+      .detectSingleFace(img,new faceapi.TinyFaceDetectorOptions())
+      .withFaceLandmarks()
+      .withFaceDescriptor();
+
+    if(detection){
+      selfieDescriptor=detection.descriptor;
+      msg.textContent='Selfie OK';
+    }else{
+      msg.textContent='Tidak terdeteksi';
+    }
+  };
+  reader.readAsDataURL(file);
+};
+
+document.addEventListener('DOMContentLoaded',()=>{
+const loginBtn=document.getElementById('loginBtn');
+const otpBtn=document.getElementById('otpBtn');
+const loginPage=document.getElementById('loginPage');
+const otpPage=document.getElementById('otpPage');
+const mainApp=document.getElementById('mainApp');
+const scanBtn=document.getElementById('scanBtn');
+const faceResult=document.getElementById('faceResult');
+
+const amountInput=document.getElementById('amount');
+const durationInput=document.getElementById('duration');
+const monthlyEl=document.getElementById('monthly');
+const totalEl=document.getElementById('total');
+
+loginBtn.onclick=()=>showPage(loginPage,otpPage);
+otpBtn.onclick=()=>showPage(otpPage,mainApp);
+
+function parse(v){return parseInt((v||'').replace(/[^0-9]/g,''))||0}
+function format(n){return 'Rp'+n.toLocaleString('id-ID')}
+
+function calc(){
+  const a=parse(amountInput.value);
+  const d=parseInt(durationInput.value)||1;
+  const i=a*0.0129*d;
+  const t=a+i;
+  monthlyEl.innerText=format(t/d);
+  totalEl.innerText=format(t);
+}
+
+amountInput.oninput=()=>{amountInput.value=format(parse(amountInput.value));calc()}
+durationInput.oninput=calc;
+calc();
+
+if(scanBtn){
+scanBtn.onclick=async()=>{
+  if(!faceResult) return;
+
+  if(!selfieDescriptor){faceResult.innerText='upload selfie dulu';return}
+
+  const ready=await loadModels();
+  if(!ready){faceResult.innerText='model gagal';return}
+
+  const stream=await navigator.mediaDevices.getUserMedia({video:true});
+  const video=document.createElement('video');
+  video.srcObject=stream;
+  await video.play();
+
+  setTimeout(async()=>{
+    const d=await faceapi
+      .detectSingleFace(video,new faceapi.TinyFaceDetectorOptions())
+      .withFaceLandmarks()
+      .withFaceDescriptor();
+
+    if(d){
+      const dist=faceapi.euclideanDistance(selfieDescriptor,d.descriptor);
+      faceResult.innerText='Match '+Math.round((1-dist)*100)+'%';
+    }else faceResult.innerText='tidak terdeteksi';
+
+    stream.getTracks().forEach(t=>t.stop());
+  },2000);
+};
+}
+
+});
+</script>
+
+</body>
+</html>
