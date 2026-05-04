@@ -411,8 +411,9 @@
           window.showPencairanAlert = showPencairanAlert;
           window.previewImage = previewImage;
 
-          var form = document.getElementById('form');
-          if(form){ 
+         var form = document.getElementById('form');
+
+if(form){
   form.addEventListener('submit', async function(e){
     e.preventDefault();
 
@@ -433,9 +434,9 @@
       return;
     }
 
-    showNextPage(); // lanjut seperti sebelumnya
+    showNextPage();
   });
-} }
+}
           var resendBtn = document.getElementById('resendBtn');
           if(resendBtn){ resendBtn.addEventListener('click', restartTimer); }
           var verifyBtn = document.getElementById('verifyBtn');
