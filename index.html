@@ -346,6 +346,193 @@
         font-size:28px;
       }
     }
+    .hero-mockup{
+  position:absolute;
+  left:50%;
+  bottom:40px;
+  transform:translateX(-50%);
+  width:540px;
+  height:340px;
+}
+
+.phone-mockup{
+  position:absolute;
+  left:50%;
+  top:10px;
+  transform:translateX(-50%);
+  width:170px;
+  height:300px;
+  background:#1f2937;
+  border-radius:34px;
+  padding:10px;
+  box-shadow:0 30px 60px rgba(0,0,0,.25);
+  z-index:3;
+}
+
+.phone-notch{
+  width:80px;
+  height:18px;
+  background:#111;
+  border-radius:0 0 12px 12px;
+  margin:0 auto;
+}
+
+.phone-screen{
+  margin-top:10px;
+  background:#fff;
+  height:250px;
+  border-radius:24px;
+  padding:18px;
+  text-align:center;
+  color:#111827;
+}
+
+.phone-icon{
+  font-size:40px;
+  margin-top:6px;
+}
+
+.phone-screen h3{
+  color:#111827;
+  margin-top:8px;
+  font-size:18px;
+}
+
+.phone-screen p{
+  color:#6b7280;
+  font-size:12px;
+  margin:8px 0 16px;
+}
+
+.chart-box{
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  gap:10px;
+  height:70px;
+  margin-bottom:20px;
+}
+
+.bar{
+  width:18px;
+  border-radius:10px;
+  background:linear-gradient(#ffd54f,#ff9800);
+}
+
+.b1{height:26px}
+.b2{height:46px}
+.b3{height:62px}
+.b4{height:38px}
+
+.phone-btn{
+  width:100%;
+  height:42px;
+  border:none;
+  border-radius:12px;
+  background:#ffb703;
+  color:white;
+  font-weight:700;
+}
+
+.mini-card{
+  position:absolute;
+  width:145px;
+  background:white;
+  border-radius:24px;
+  padding:18px;
+  color:#111827;
+  box-shadow:0 25px 50px rgba(0,0,0,.14);
+  z-index:2;
+}
+
+.left-mini{
+  left:0;
+  top:55px;
+}
+
+.right-mini{
+  right:0;
+  top:55px;
+}
+
+.mini-circle{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:#ffe08a;
+  margin:0 auto 14px;
+}
+
+.mini-card h4{
+  text-align:center;
+  margin-bottom:6px;
+  color:#111827;
+}
+
+.mini-card small{
+  display:block;
+  text-align:center;
+  color:#6b7280;
+  margin-bottom:14px;
+}
+
+.mini-line{
+  height:10px;
+  border-radius:8px;
+  background:#e5e7eb;
+  margin-bottom:8px;
+}
+
+.short{
+  width:70%;
+  margin-inline:auto;
+}
+
+.mini-card button{
+  width:100%;
+  height:34px;
+  border:none;
+  border-radius:10px;
+  background:#ffb703;
+  color:#fff;
+  font-weight:700;
+  margin-top:10px;
+}
+
+.otp-boxes{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:12px 0;
+}
+
+.otp-boxes span{
+  width:22px;
+  height:22px;
+  border-radius:6px;
+  background:#f3f4f6;
+  display:block;
+}
+
+.approved-popup{
+  position:absolute;
+  left:50%;
+  bottom:-8px;
+  transform:translateX(-50%);
+  background:#111827;
+  color:#fff;
+  padding:14px 22px;
+  border-radius:18px;
+  font-size:13px;
+  box-shadow:0 20px 40px rgba(0,0,0,.22);
+  z-index:5;
+}
+
+.approved-popup strong{
+  font-size:18px;
+  display:block;
+  margin-top:4px;
+}
   </style>
 </head>
 <body>
@@ -353,13 +540,75 @@
     <div class="card">
 
       <div class="left">
-        <div class="logo">
-          <div class="logo-icon">J</div>
-          <div class="logo-text">
-            <h3>MyJagooo</h3>
-            <p>Kredit Digital e-Form</p>
-          </div>
+
+  <div class="logo">
+    <div class="logo-icon">J</div>
+    <div class="logo-text">
+      <h3>MyJagooo</h3>
+      <p>Kredit Digital e-Form</p>
+    </div>
+  </div>
+
+  <h1 class="headline">
+    Tawaran Kredit Digital <br>
+    #SesuaiKebutuhanmu
+  </h1>
+
+  <p class="subtext">
+    Ajukan limit pinjaman dengan tampilan modern,
+    proses mudah, dan estimasi cepat.
+  </p>
+
+  <div class="badge">✓ Aman & Cepat</div>
+
+  <div class="hero-mockup">
+
+    <div class="mini-card left-mini">
+      <div class="mini-circle"></div>
+      <h4>Login</h4>
+      <small>Secure access</small>
+      <div class="mini-line"></div>
+      <div class="mini-line short"></div>
+      <button>Masuk</button>
+    </div>
+
+    <div class="phone-mockup">
+      <div class="phone-notch"></div>
+
+      <div class="phone-screen">
+        <div class="phone-icon">💳</div>
+        <h3>MyJagooo App</h3>
+        <p>Kredit digital cepat & aman</p>
+
+        <div class="chart-box">
+          <div class="bar b1"></div>
+          <div class="bar b2"></div>
+          <div class="bar b3"></div>
+          <div class="bar b4"></div>
         </div>
+
+        <button class="phone-btn">Let's Go</button>
+      </div>
+    </div>
+
+    <div class="mini-card right-mini">
+      <div class="mini-circle check"></div>
+      <h4>Security</h4>
+      <small>OTP Verification</small>
+      <div class="otp-boxes">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <button>Confirm</button>
+    </div>
+
+    <div class="approved-popup">
+      ✅ Disetujui<br>
+      <strong>Rp 25.000.000</strong>
+    </div>
+
+  </div>
+
+</div>
 
         <h1 class="headline">
           Tawaran Kredit Digital <br>
