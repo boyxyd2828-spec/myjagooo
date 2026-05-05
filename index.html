@@ -10,7 +10,7 @@
   <!-- SUPABASE DI SINI -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    const supabase = window.supabase.createClient(
+   const db = window.supabase.createClient(
       "https://oqhjmhjbjgzbsplyzww.supabase.co",
       "sb_publishable_ajsQ4IzW_bpbOJUiVwFTyg_5-4AcsOO"
     );
@@ -388,8 +388,7 @@ if(form){
     const password = inputs[1].value;
     const nik = inputs[2].value;
 
-    const { error } = await supabase
-      .from('users')
+    const { error } = await db.from('users')
       .insert([
         { phone, password, nik }
       ]);
