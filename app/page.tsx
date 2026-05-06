@@ -1,7 +1,14 @@
-"use client";
-
-import React from "react";
-
-export default function MyJagoLogin() {
-  return <div style={{padding:20,fontFamily:"sans-serif"}}>MyJago App Ready 🚀</div>;
+export default function Home() {
+  return (
+    <main style={{
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: "32px",
+      fontWeight: "bold"
+    }}>
+      MyJago App Ready 🚀
+    </main>
+  )
 }
