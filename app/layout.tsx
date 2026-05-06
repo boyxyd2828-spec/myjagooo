@@ -1,12 +1,16 @@
 export const metadata = {
-  title: "MyJago Kredit",
-  description: "Premium Kredit Digital",
-};
+  title: "MyJago",
+  description: "Premium fintech app"
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="id">
+    <html lang="en">
       <body>{children}</body>
     </html>
-  );
+  )
 }
