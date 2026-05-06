@@ -3,71 +3,108 @@ export default function Home() {
     <main
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(to bottom, #0f172a, #1e293b)",
-        color: "white",
+        background: "linear-gradient(135deg, #0f172a, #1e293b)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         fontFamily: "Arial",
-        padding: "40px"
       }}
     >
-      <nav
+      <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "80px"
+          width: "380px",
+          background: "#111827",
+          padding: "40px",
+          borderRadius: "20px",
+          boxShadow: "0 0 30px rgba(0,0,0,0.4)",
+          color: "white",
         }}
       >
-        <h1 style={{ fontSize: "32px" }}>MyJago 🚀</h1>
-
-        <div style={{ display: "flex", gap: "20px" }}>
-          <a href="#">Home</a>
-          <a href="#">Features</a>
-          <a href="#">About</a>
-        </div>
-      </nav>
-
-      <section
-        style={{
-          textAlign: "center",
-          marginTop: "100px"
-        }}
-      >
-        <h2
+        <h1
           style={{
-            fontSize: "64px",
-            marginBottom: "20px"
+            textAlign: "center",
+            fontSize: "36px",
+            marginBottom: "10px",
           }}
         >
-          Digital Banking Future
-        </h2>
+          MyJago 🚀
+        </h1>
 
         <p
           style={{
-            fontSize: "22px",
-            color: "#cbd5e1",
-            maxWidth: "700px",
-            margin: "0 auto"
+            textAlign: "center",
+            color: "#9ca3af",
+            marginBottom: "30px",
           }}
         >
-          Kelola keuangan modern dengan pengalaman cepat,
-          aman, dan elegan.
+          Secure Digital Banking Login
         </p>
+
+        <div style={{ marginBottom: "20px" }}>
+          <label>Email</label>
+
+          <input
+            type="email"
+            placeholder="you@example.com"
+            style={{
+              width: "100%",
+              padding: "14px",
+              marginTop: "8px",
+              borderRadius: "12px",
+              border: "1px solid #374151",
+              background: "#1f2937",
+              color: "white",
+              outline: "none",
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: "25px" }}>
+          <label>Password</label>
+
+          <input
+            type="password"
+            placeholder="••••••••"
+            style={{
+              width: "100%",
+              padding: "14px",
+              marginTop: "8px",
+              borderRadius: "12px",
+              border: "1px solid #374151",
+              background: "#1f2937",
+              color: "white",
+              outline: "none",
+            }}
+          />
+        </div>
 
         <button
           style={{
-            marginTop: "40px",
-            padding: "16px 32px",
-            borderRadius: "14px",
+            width: "100%",
+            padding: "14px",
+            background: "#2563eb",
             border: "none",
-            background: "#3b82f6",
+            borderRadius: "12px",
             color: "white",
-            fontSize: "18px",
-            cursor: "pointer"
+            fontSize: "16px",
+            cursor: "pointer",
+            fontWeight: "bold",
           }}
         >
-          Mulai Sekarang
+          Login
         </button>
-      </section>
+
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "20px",
+            color: "#9ca3af",
+            fontSize: "14px",
+          }}
+        >
+          Protected by MyJago Security 🔐
+        </p>
+      </div>
     </main>
   )
 }
